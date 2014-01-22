@@ -1,0 +1,32 @@
+{
+  "name": "flex-svg",
+  "version": "0.0.0",
+  "description": "flex-svg.js",
+  "main": "flex-svg.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shinnn/node-flex-svg.git"
+  },
+  "author": {
+    "name": "Shinnosuke Watanabe",
+    "url": "https://github.com/shinnn"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/shinnn/node-flex-svg/issues"
+  },
+  "homepage": "https://github.com/shinnn/node-flex-svg",
+  "dependencies": {
+    "xml2js": "~0.4.1"
+  },
+  "devDependencies": {
+    "gulp": "~3.4.0",
+    "gulp-jshint": "~1.3.4",
+    "jshint-stylish": "~0.1.5",
+    "gulp-release": "git://github.com/tomchentw/gulp-release.git"
+  }
+}

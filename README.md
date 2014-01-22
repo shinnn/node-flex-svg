@@ -1,2 +1,5 @@
-node-flex-svg
-=============
+# node-flex-svg
+
+## License
+
+MIT License
