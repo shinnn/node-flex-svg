@@ -8,9 +8,20 @@
 
 Makes SVG files of flexible width and height
 
+## Installation
+
+Install via [npm](https://npmjs.org/).
+
+```
+npm install --save flex-svg
+```
+
+Make sure you have installed [Node](http://nodejs.org/) before running this command.
+
 ## Usage
 
-### flexSvg(SVGString, callback);
+### flexSvg(SVGString, callback)
+
 
 ## License
 
