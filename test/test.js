@@ -2,7 +2,6 @@
 
 var fs = require('fs');
 var assert = require('assert');
-var xml2js = require('xml2js');
 var flexSvg = require('../flex-svg.js');
 
 describe('Converted SVG', function() {
@@ -16,7 +15,7 @@ describe('Converted SVG', function() {
           '<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 400 100" enable-background="new 0 0 400 100" xml:space="preserve">\n' +
           '  <rect width="400px" height="100px" style="fill:rgb(0,0,255);"/>\n' +
           '</svg>';
-        assert.strictEqual(expected, svgStr);
+        assert.strictEqual(svgStr, expected);
         done();
       });
     });
