@@ -20,6 +20,9 @@
     "url": "https://github.com/shinnn/node-flex-svg/issues"
   },
   "homepage": "https://github.com/shinnn/node-flex-svg",
+  "engines": {
+    "node": ">= 0.9.0"
+  },
   "dependencies": {
     "xml2js": "~0.4.1"
   },
