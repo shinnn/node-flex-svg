@@ -17,12 +17,13 @@ gulp.task('lint', function() {
       node: true,
       // mocha
       globals: {
-        describe   : false,
-        it         : false,
-        before     : false,
-        beforeEach : false,
-        after      : false,
-        afterEach  : false
+        describe: false,
+        it: false,
+        specify: false,
+        before: false,
+        beforeEach: false,
+        after: false,
+        afterEach: false
       }
     }))
     .pipe(jshint.reporter(stylish));
@@ -36,4 +37,8 @@ gulp.task('test', function() {
     .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('default', ['lint', 'test']);
+gulp.task('watch', function () {
+  gulp.watch('{.,test}/*.js', ['lint', 'test']);
+});
+
+gulp.task('default', ['lint', 'test', 'watch']);
