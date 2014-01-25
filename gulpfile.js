@@ -1,14 +1,10 @@
-// flex-svg.js
-// Copyright (c) 2014 Shinnosuke Watanabe
-// Licensed uder the MIT license
-
 'use strict';
 
 var gulp = require('gulp');
 
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
-var gulpRelease = require('gulp-release');
+var mocha = require('gulp-mocha');
 
 gulp.task('lint', function() {
   return gulp.src(['./*.js'])
@@ -22,20 +18,12 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('release', function(){
-  return gulp.src('package.json')
-    .pipe(gulpRelease({
-      commit: {
-        message: 'release: <%= package.version %>'
-      },
-      tag: {
-        name: '<%= package.version %>'
-      },
-      push: {
-        upstream: 'master'
-      },
-      publish: true
-    }));
+gulp.task('test', function() {
+  return gulp.src(['./test/test.js'])
+    .pipe(mocha({
+      reporter: 'Spec'
+    }))
+    .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('default', ['lint']);
+gulp.task('default', ['lint', 'test']);
