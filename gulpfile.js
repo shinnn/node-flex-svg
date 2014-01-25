@@ -21,7 +21,7 @@ gulp.task('lint', function() {
 gulp.task('test', function() {
   return gulp.src(['./test/test.js'])
     .pipe(mocha({
-      reporter: 'Spec'
+      reporter: 'spec'
     }))
     .pipe(jshint.reporter(stylish));
 });
