@@ -5,11 +5,12 @@
 'use strict';
 
 var xml2js = require('xml2js');
-var parseString = xml2js.parseString;
+var parser = new xml2js.Parser();
 var builder = new xml2js.Builder();
+xml2js = undefined;
 
-module.exports = function flexSvg(svgString, callback) {
-  parseString(svgString, function (err, result) {
+module.exports = function flexSvg(data, callback) {
+  parser.parseString(data, function (err, result) {
     delete result.svg.$.width;
     delete result.svg.$.height;
     
