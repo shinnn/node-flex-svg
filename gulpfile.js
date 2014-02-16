@@ -7,7 +7,7 @@ var stylish = require('jshint-stylish');
 var mocha = require('gulp-mocha');
 
 gulp.task('lint', function() {
-  return gulp.src(['{.,test}/*.js'])
+  return gulp.src(['*.js', 'test/test.js'])
     .pipe(jshint({
       camelcase: true,
       trailing: true,
@@ -30,7 +30,7 @@ gulp.task('lint', function() {
 });
 
 gulp.task('test', function() {
-  return gulp.src(['./test/test.js'])
+  return gulp.src(['test/test.js'])
     .pipe(mocha({
       reporter: 'spec'
     }))
@@ -38,7 +38,7 @@ gulp.task('test', function() {
 });
 
 gulp.task('watch', function () {
-  gulp.watch('{.,test}/*.js', ['lint', 'test']);
+  gulp.watch(['*.js', 'test/test.js'], ['lint', 'test']);
 });
 
 gulp.task('default', ['lint', 'test', 'watch']);
