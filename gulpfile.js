@@ -32,7 +32,7 @@ gulp.task('lint', function() {
 gulp.task('test', function() {
   return gulp.src(['test/test.js'])
     .pipe(mocha({
-      reporter: 'spec'
+      reporter: 'nyan'
     }))
     .pipe(jshint.reporter(stylish));
 });
