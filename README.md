@@ -4,7 +4,6 @@
 [![Build Status](https://travis-ci.org/shinnn/node-flex-svg.png?branch=master)](https://travis-ci.org/shinnn/node-flex-svg)
 [![Dependency Status](https://david-dm.org/shinnn/node-flex-svg.png)](https://david-dm.org/shinnn/node-flex-svg)
 [![devDependency Status](https://david-dm.org/shinnn/node-flex-svg/dev-status.png)](https://david-dm.org/shinnn/node-flex-svg#info=devDependencies)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/shinnn/node-flex-svg/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 Makes SVG files of flexible width and height
 
@@ -19,6 +18,8 @@ npm i --save flex-svg
 Make sure you have installed [Node](http://nodejs.org/) before running this command.
 
 ## Usage
+
+*The plugins for [Grunt](https://github.com/shinnn/grunt-flex-svg) and [gulp](https://github.com/shinnn/gulp-flex-svg) are also available.*
 
 ### flexSvg( SVGdata, callback )
 
@@ -64,6 +65,6 @@ fs.readFile('path/to/svg', function(readErr, data) {
 
 ## License
 
-Copyright (c) 2014 [Shinnosuke Watanabe](https://github.com/shinnn) All rights reserved.
+Copyright (c) 2014 [Shinnosuke Watanabe](https://github.com/shinnn)
 
-Licensed under [the MIT license](./LICENSE).
+Licensed under [the MIT license](./LICENSE)
