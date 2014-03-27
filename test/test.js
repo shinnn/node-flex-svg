@@ -2,23 +2,45 @@
 
 var fs = require('fs');
 var assert = require('assert');
+var Q = require('q');
 var flexSvg = require('../flex-svg.js');
 
+var readFile = Q.denodeify(fs.readFile);
+var promiseFlexSvg = Q.denodeify(flexSvg);
+var flexSvgFile = function(path) {
+  return readFile(path).then(function(res) {
+    return promiseFlexSvg(res);
+  });
+};
+
 describe('flex-svg', function() {
-  it('should remove width and height from SVG.', function(done) {
-    var expected =
-      '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' +
-      '<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 400 100" enable-background="new 0 0 400 100" xml:space="preserve">\n' +
-      '  <rect width="400px" height="100px"/>\n' +
-      '</svg>';
-    
-    fs.readFile('test/fixture/rect.svg', function(readErr, data) {
-      if (readErr) done(readErr);
-      flexSvg(data, function(parseErr, svgStr) {
-        if (parseErr) done(parseErr);
-        assert.strictEqual(svgStr, expected);
-        done();
-      });
+  it('should remove width and height attributes from SVG.', function() {
+    return Q.all([
+      flexSvgFile('test/fixture/width_and_height.svg'),
+      readFile('test/expected/width_and_height.svg')
+    ]).spread(function(actual, expected) {
+      assert.strictEqual(actual, expected.toString());
+    });
+  });
+
+  it("should return SVG string even if the input SVG doesn't have width and height attributes", function() {
+    return Q.all([
+      flexSvgFile('test/fixture/no_attr.svg'),
+      readFile('test/expected/no_attr.svg')
+    ]).spread(function(actual, expected) {
+      assert.strictEqual(actual, expected.toString());
+    });
+  });
+  
+  it('should throw an error when input string is not XML.', function() {
+    assert.throws(function() {
+      flexSvg("I'm not XML.", function() {});
+    });
+  });
+
+  it('should throw an error when input string is not SVG but XML.', function() {
+    assert.throws(function() {
+      flexSvg("<html></html>", function() {});
     });
   });
 });
