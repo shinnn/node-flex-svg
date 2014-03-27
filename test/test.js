@@ -23,7 +23,7 @@ describe('flex-svg', function() {
     });
   });
 
-  it("should return SVG string even if the input SVG doesn't have width and height attributes", function() {
+  it("should return SVG string even if the input SVG doesn't have any attributes", function() {
     return Q.all([
       flexSvgFile('test/fixture/no_attr.svg'),
       readFile('test/expected/no_attr.svg')
