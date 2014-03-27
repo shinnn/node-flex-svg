@@ -2,9 +2,10 @@
   "name": "flex-svg",
   "version": "0.1.0",
   "description": "Makes SVG files of flexible width and height",
-  "main": "flex-svg.js",
+  "main": "lib/flex-svg.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "prepublish": "npm test"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "gulp": "~3.5.6",
+    "gulp-es6-transpiler": "^0.1.2",
     "gulp-jshint": "^1.5.1",
     "gulp-mocha": "~0.4.1",
     "jshint-stylish": "~0.1.5",
