@@ -1,11 +1,11 @@
-# node-flex-svg
+# flex-svg
 
 [![NPM version](https://badge.fury.io/js/flex-svg.png)](http://badge.fury.io/js/flex-svg)
 [![Build Status](https://travis-ci.org/shinnn/node-flex-svg.png?branch=master)](https://travis-ci.org/shinnn/node-flex-svg)
 [![Dependency Status](https://david-dm.org/shinnn/node-flex-svg.png)](https://david-dm.org/shinnn/node-flex-svg)
 [![devDependency Status](https://david-dm.org/shinnn/node-flex-svg/dev-status.png)](https://david-dm.org/shinnn/node-flex-svg#info=devDependencies)
 
-Makes SVG files of flexible width and height
+A [Node](http://nodejs.org/) module for creating SVG files of flexible width and height
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
