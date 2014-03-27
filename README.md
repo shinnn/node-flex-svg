@@ -7,6 +7,24 @@
 
 Makes SVG files of flexible width and height
 
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px">
+  <rect width="50px" height="50px"/>
+</svg>
+```
+
+↓
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg xmlns="http://www.w3.org/2000/svg">
+  <rect width="50px" height="50px"/>
+</svg>
+```
+
+If `width` and `height` attributes of outermost svg elements are not specified, they are regarded as `100%` according to [*SVG 1.1 Specification*](http://www.w3.org/TR/SVG11/struct.html#SVGElementWidthAttribute).
+
 ## Installation
 
 Install via [npm](https://npmjs.org/).
@@ -30,17 +48,6 @@ The callback function takes two arguments. The first is XML parse error, and the
 
 ## Example
 
-### Original SVG file
-
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px">
-  <rect width="50px" height="50px"></rect>
-</svg>
-```
-
-### Script
-
 ```javascript
 var fs = require('fs');
 var flexSvg = require('flex-svg');
@@ -52,15 +59,6 @@ fs.readFile('path/to/svg', function(readErr, data) {
     console.log(result);
   });
 });
-```
-
-### Output
-
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<svg xmlns="http://www.w3.org/2000/svg">
-  <rect width="50px" height="50px"/>
-</svg>
 ```
 
 ## License
