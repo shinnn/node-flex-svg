@@ -1,4 +1,5 @@
 .travis.yml
 gulpfile.js
-example/
+tmp
 test/
+src/
