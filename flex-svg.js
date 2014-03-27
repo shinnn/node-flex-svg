@@ -11,8 +11,9 @@ xml2js = undefined;
 
 module.exports = function flexSvg(data, callback) {
   parser.parseString(data, function (err, result) {
-    delete result.svg.$.width;
-    delete result.svg.$.height;
+    var attributes = result.svg.$;
+    delete attributes.width;
+    delete attributes.height;
     
     callback(err, builder.buildObject(result));
   });
