@@ -25,21 +25,22 @@ A [Node](http://nodejs.org/) module for creating SVG files of flexible width and
 
 If `width` and `height` attributes of outermost svg elements are not specified, they are regarded as `100%` according to [*SVG 1.1 Specification*](http://www.w3.org/TR/SVG11/struct.html#SVGElementWidthAttribute).
 
+## Used by
+
+* [grunt-flex-svg](https://github.com/shinnn/grunt-flex-svg) ([Grunt](http://gruntjs.com/) plugin)
+* [gulp-flex-svg](https://github.com/shinnn/gulp-flex-svg) ([gulp](http://gulpjs.com/) plugin)
+
 ## Installation
 
-Install via [npm](https://npmjs.org/).
+Install with [npm](https://www.npmjs.org/). (Make sure you have installed [Node](http://nodejs.org/).)
 
 ```
-npm i --save flex-svg
+npm install --save flex-svg
 ```
-
-Make sure you have installed [Node](http://nodejs.org/) before running this command.
 
 ## Usage
 
-*The plugins for [Grunt](https://github.com/shinnn/grunt-flex-svg) and [gulp](https://github.com/shinnn/gulp-flex-svg) are also available.*
-
-### flexSvg( SVGdata, callback )
+### flexSvg(SVGdata, callback)
 
 SVGdata: `String` of SVG or `Buffer` of SVG file  
 callback: `Function`
@@ -59,6 +60,25 @@ fs.readFile('path/to/svg', function(readErr, data) {
     console.log(result);
   });
 });
+```
+
+## CLI
+
+You can use this module as a CLI tool by installing it globally.
+
+```
+npm install -g flex-svg
+```
+
+### Usage
+
+```
+Usage: flex-svg [input.svg] [options]
+
+Options:
+  -h, --help    Display usage information.       
+  -o, --output  Output file (STDOUT by default). 
+  -s, --string  Input SVG string instead of file.
 ```
 
 ## License

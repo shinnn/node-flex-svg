@@ -1,4 +1,4 @@
-// flex-svg.js
+// flex-svg
 // Copyright (c) 2014 Shinnosuke Watanabe
 // Licensed uder the MIT license
 

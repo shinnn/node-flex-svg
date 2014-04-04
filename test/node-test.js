@@ -7,10 +7,11 @@ var flexSvg = require('../lib/flex-svg.js');
 
 var readFile = Q.denodeify(fs.readFile);
 var promiseFlexSvg = Q.denodeify(flexSvg);
-var flexSvgFile = (path) => {
+
+function flexSvgFile(path) {
   return readFile(path)
     .then(res => promiseFlexSvg(res));
-};
+}
 
 describe('flex-svg', () => {
   it('should remove width and height attributes from SVG.', () => {

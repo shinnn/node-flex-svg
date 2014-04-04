@@ -37,19 +37,19 @@ gulp.task('transpile', function(cb) {
   gulp.src(['src/*.js'])
     .pipe(es6transpiler())
     .pipe(gulp.dest('lib'));
-  gulp.src(['test/test.js'])
+  gulp.src(['test/*.js'])
     .pipe(es6transpiler({globals: GLOBALS}))
     .pipe(gulp.dest('tmp'));
   cb();
 });
 
 
-gulp.task('watch', function () {
+gulp.task('watch', function() {
   gulp.watch(['{,src/,test/}*.js'], ['test']);
 });
 
 gulp.task('test', ['lint', 'transpile'], function() {
-  gulp.src(['tmp/test.js'])
+  gulp.src(['tmp/*.js'])
     .pipe(mocha({reporter: 'nyan'}));
 });
 
