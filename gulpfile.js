@@ -1,11 +1,9 @@
 'use strict';
 
 var gulp = require('gulp');
+var $ = require('gulp-load-plugins')();
 
-var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
-var mocha = require('gulp-mocha');
-var es6transpiler = require('gulp-es6-transpiler');
 
 // mocha
 var GLOBALS = {
@@ -20,7 +18,7 @@ var GLOBALS = {
 
 gulp.task('lint', function() {
   return gulp.src(['{,src/,test/}*.js'])
-    .pipe(jshint({
+    .pipe($.jshint({
       camelcase: true,
       trailing: true,
       indent: 2,
@@ -30,15 +28,16 @@ gulp.task('lint', function() {
       esnext: true,
       globals: GLOBALS
     }))
-    .pipe(jshint.reporter(stylish));
+    .pipe($.jshint.reporter(stylish));
 });
 
 gulp.task('transpile', function(cb) {
   gulp.src(['src/*.js'])
-    .pipe(es6transpiler())
+    .pipe($.es6Transpiler())
     .pipe(gulp.dest('lib'));
   gulp.src(['test/*.js'])
-    .pipe(es6transpiler({globals: GLOBALS}))
+    .pipe($.es6Transpiler({globals: GLOBALS}))
+    .pipe($.espower())
     .pipe(gulp.dest('tmp'));
   cb();
 });
@@ -50,7 +49,7 @@ gulp.task('watch', function() {
 
 gulp.task('test', ['lint', 'transpile'], function() {
   gulp.src(['tmp/*.js'])
-    .pipe(mocha({reporter: 'nyan'}));
+    .pipe($.mocha({reporter: 'nyan'}));
 });
 
 gulp.task('default', ['test', 'watch']);

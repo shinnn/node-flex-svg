@@ -1,9 +1,9 @@
 'use strict';
 
 var fs = require('fs');
-var assert = require('assert');
 var Q = require('q');
 var flexSvg = require('../lib/flex-svg.js');
+var assert = require('power-assert');
 
 var readFile = Q.denodeify(fs.readFile);
 var promiseFlexSvg = Q.denodeify(flexSvg);
