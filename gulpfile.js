@@ -18,16 +18,7 @@ var GLOBALS = {
 
 gulp.task('lint', function() {
   return gulp.src(['{,src/,test/}*.js'])
-    .pipe($.jshint({
-      camelcase: true,
-      trailing: true,
-      indent: 2,
-      globalstrict: true,
-      browser: false,
-      node: true,
-      esnext: true,
-      globals: GLOBALS
-    }))
+    .pipe($.jshint())
     .pipe($.jshint.reporter(stylish));
 });
 

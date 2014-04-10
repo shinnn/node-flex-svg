@@ -1,0 +1,9 @@
+{
+  "camelcase": true,
+  "globalstrict": true,
+  "indent": 2,
+  "browser": false,
+  "node": true,
+  "mocha": true,
+  "esnext": true
+}
