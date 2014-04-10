@@ -45,8 +45,8 @@
     "gulp-mocha": "~0.4.1",
     "jshint-stylish": "~0.1.5",
     "q": "^2.0.1",
-    "gulp-espower": "^0.5.0",
+    "gulp-espower": "^0.6.0",
     "gulp-load-plugins": "^0.5.0",
-    "power-assert": "^0.4.1"
+    "power-assert": "^0.6.1"
   }
 }
