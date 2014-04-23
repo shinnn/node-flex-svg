@@ -1,3 +1,5 @@
+/* jshint quotmark: false */
+
 'use strict';
 
 var fs = require('fs');
@@ -16,7 +18,7 @@ function flexSvgFile(path) {
 describe('flex-svg', () => {
   it('should remove width and height attributes from SVG.', () => {
     return Q.all([
-      flexSvgFile('test/fixture/width_and_height.svg'),
+      flexSvgFile('test/fixtures/width_and_height.svg'),
       readFile('test/expected/width_and_height.svg')
     ]).spread((actual, expected) => {
       assert.strictEqual(actual, expected.toString());
@@ -25,7 +27,7 @@ describe('flex-svg', () => {
 
   it("should return SVG string even if the input SVG doesn't have any attributes", () => {
     return Q.all([
-      flexSvgFile('test/fixture/no_attr.svg'),
+      flexSvgFile('test/fixtures/no_attr.svg'),
       readFile('test/expected/no_attr.svg')
     ]).spread((actual, expected) => {
       assert.strictEqual(actual, expected.toString());
