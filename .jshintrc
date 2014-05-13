@@ -1,6 +1,6 @@
 {
   "camelcase": true,
-  "globalstrict": true,
+  "strict": true,
   "indent": 2,
   "quotmark": "single",
   "browser": false,
