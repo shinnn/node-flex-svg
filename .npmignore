@@ -1,4 +1,5 @@
 .travis.yml
+.jshintrc
 gulpfile.js
 tmp
 test/
