@@ -2,19 +2,8 @@
 
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
-var merge = require('event-stream').merge;
+var mergeStream = require('merge-stream');
 var stylish = require('jshint-stylish');
-
-// mocha
-var GLOBALS = {
-  describe: false,
-  it: false,
-  specify: false,
-  before: false,
-  beforeEach: false,
-  after: false,
-  afterEach: false
-};
 
 gulp.task('lint', function() {
   gulp.src(['{,src/,test/}*.js'])
@@ -25,20 +14,26 @@ gulp.task('lint', function() {
     .pipe($.jshint.reporter());
 });
 
-gulp.task('transpile', function(cb) {
-  gulp.src(['{lib,tmp}/*'], {read: false})
-    .pipe($.rimraf())
-    .on('finish', function() {
-      merge(
-        gulp.src(['src/*.js'])
-          .pipe($.es6Transpiler())
-          .pipe(gulp.dest('lib')),
-        gulp.src(['test/*.js'])
-          .pipe($.es6Transpiler({globals: GLOBALS}))
-          .pipe($.espower())
-          .pipe(gulp.dest('tmp'))
-      ).on('end', cb);
-    });
+gulp.task('clean', function() {
+  return gulp.src(['{lib,tmp}/*'], {read: false})
+    .pipe($.rimraf());
+});
+
+gulp.task('transpile', ['clean'], function() {
+  return mergeStream(
+    gulp.src(['src/*.js'])
+      .pipe($.es6Transpiler())
+      .pipe(gulp.dest('lib')),
+    gulp.src(['test/*.js'])
+      .pipe($.es6Transpiler({
+        globals: {
+          describe: false,
+          it: false
+        }
+      }))
+      .pipe($.espower())
+      .pipe(gulp.dest('tmp'))
+  );
 });
 
 gulp.task('watch', function() {
@@ -52,7 +47,7 @@ gulp.task('watch', function() {
 
 gulp.task('test', ['lint', 'transpile'], function() {
   gulp.src(['tmp/*.js'])
-    .pipe($.mocha({reporter: 'nyan'}));
+    .pipe($.mocha({reporter: 'spec'}));
 });
 
 gulp.task('default', ['test', 'watch']);
