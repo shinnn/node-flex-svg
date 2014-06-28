@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
+var del = require('del');
 var mergeStream = require('merge-stream');
 var stylish = require('jshint-stylish');
 
@@ -14,10 +15,7 @@ gulp.task('lint', function() {
     .pipe($.jshint.reporter());
 });
 
-gulp.task('clean', function() {
-  return gulp.src(['{lib,tmp}/*'], {read: false})
-    .pipe($.rimraf());
-});
+gulp.task('clean', del.bind(null, ['{lib,tmp}']));
 
 gulp.task('transpile', ['clean'], function() {
   return mergeStream(
