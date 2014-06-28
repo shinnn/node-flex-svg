@@ -33,7 +33,7 @@ describe('flex-svg', () => {
       assert.strictEqual(actual, expected.toString());
     });
   });
-  
+
   it('should throw an error when input string is not XML.', () => {
     assert.throws(() => {
       flexSvg("I'm not XML.", () => {});

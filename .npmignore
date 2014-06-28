@@ -1,6 +1,7 @@
-.travis.yml
+.editorconfig
 .jshintrc
+.travis.yml
 gulpfile.js
-tmp
-test/
 src/
+test/
+tmp
