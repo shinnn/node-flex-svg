@@ -1,7 +1,8 @@
 # flex-svg
 
-[![NPM version](https://badge.fury.io/js/flex-svg.svg)](http://badge.fury.io/js/flex-svg)
 [![Build Status](https://travis-ci.org/shinnn/node-flex-svg.svg?branch=master)](https://travis-ci.org/shinnn/node-flex-svg)
+[![Build status](https://ci.appveyor.com/api/projects/status/9q6scamtv2b5q9cw?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/node-flex-svg)
+[![Coverage Status](https://img.shields.io/coveralls/shinnn/node-flex-svg.svg)](https://coveralls.io/r/shinnn/node-flex-svg)
 [![Dependency Status](https://david-dm.org/shinnn/node-flex-svg.svg)](https://david-dm.org/shinnn/node-flex-svg)
 [![devDependency Status](https://david-dm.org/shinnn/node-flex-svg/dev-status.svg)](https://david-dm.org/shinnn/node-flex-svg#info=devDependencies)
 
@@ -32,22 +33,25 @@ If `width` and `height` attributes of outermost svg elements are not specified, 
 
 ## Installation
 
-Install with [npm](https://www.npmjs.org/). (Make sure you have installed [Node](http://nodejs.org/).)
+[![NPM version](https://badge.fury.io/js/flex-svg.svg)](https://www.npmjs.org/package/flex-svg)
+
+[Use npm.](https://www.npmjs.org/doc/cli/npm-install.html)
 
 ```
-npm install --save flex-svg
+npm install flex-svg
 ```
 
-## Usage
+## API
 
-### flexSvg(SVGdata, callback)
+### flexSvg(*SVGdata*, *callback*)
 
-SVGdata: `String` of SVG or `Buffer` of SVG file  
-callback: `Function`
+*SVGdata*: `String` of SVG or `Buffer` of SVG file  
+*callback*: `Function`
 
-The callback function takes two arguments. The first is XML parse error, and the second is SVG string without `width` and `height` attributes.
+#### callback(*error*, *result*)
 
-## Example
+*error*: `Error` if it fails to parse SVG, otherwise `null`  
+*result*: `String` of SVG without `width` and `height` attributes
 
 ```javascript
 var fs = require('fs');
@@ -64,7 +68,7 @@ fs.readFile('path/to/svg', function(readErr, data) {
 
 ## CLI
 
-You can use this module as a CLI tool by installing it globally.
+You can use this module as a CLI tool by installing it [globally](https://www.npmjs.org/doc/files/npm-folders.html#global-installation).
 
 ```
 npm install -g flex-svg
@@ -73,16 +77,18 @@ npm install -g flex-svg
 ### Usage
 
 ```
-Usage: flex-svg [input.svg] [options]
+Usage1: flex-svg <SVG string>
+Usage2: cat <SVG file> | flex-svg
 
 Options:
-  -h, --help    Display usage information.       
-  -o, --output  Output file (STDOUT by default). 
-  -s, --string  Input SVG string instead of file.
+  -i, --input    Input SVG file instead of SVG string.
+  -o, --output   Output file (STDOUT by default)      
+  -h, --help     Display usage information            
+  -v, --version  Display version number
 ```
 
 ## License
 
 Copyright (c) 2014 [Shinnosuke Watanabe](https://github.com/shinnn)
 
-Licensed under [the MIT license](./LICENSE)
+Licensed under [the MIT License](./LICENSE)
