@@ -90,7 +90,7 @@ test('"flex-svg" command inside a TTY context', function(t) {
   cmd(['--input', 'test/fixture.svg', '--output', 'test/tmp_foo/svg'])
   .on('close', function() {
     fs.readFile('test/tmp_foo/svg', function(err, buf) {
-      t.error(err, 'should output a file usong --output flag.');
+      t.error(err, 'should output a file using --output flag.');
       t.equal(
         buf.toString(), expected,
         'should use a file as a source, using --input flag.'
@@ -141,7 +141,7 @@ test('"flex-svg" command inside a TTY context', function(t) {
   });
 
   var inputErr = '';
-  cmd(['--input', 'foo'])
+  cmd(['--input', '____foo_____bar____baz____qux____'])
   .on('close', function(code) {
     t.notEqual(code, 0, 'should fail when it cannot read the file.');
     t.ok(
