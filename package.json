@@ -1,6 +1,6 @@
 {
   "name": "flex-svg",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Makes SVG files of flexible width and height",
   "bin": "cli.js",
   "files": [
