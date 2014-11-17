@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 'use strict';
 
-var fs = require('fs-extra');
+var fs = require('fs');
+
+var outputFileSync = require('output-file-sync');
+var yargs = require('yargs');
 
 var pkg = require('./package.json');
-
-var yargs = require('yargs');
 var argv = yargs
   .usage([
     pkg.description,
@@ -37,7 +38,7 @@ function run(data) {
       throw err;
     }
     if (argv.output) {
-      fs.outputFileSync(argv.output, result);
+      outputFileSync(argv.output, result);
     } else {
       console.log(result);
     }
