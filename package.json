@@ -49,9 +49,9 @@
     "istanbul": "^0.3.2",
     "istanbul-coveralls": "^1.0.1",
     "jscs": "^1.7.3",
-    "rimraf": "^2.2.8",
+    "read-remove-file": "^1.0.0",
     "tap-spec": "^1.0.1",
-    "tape": "^3.0.2"
+    "tape": "^3.0.3"
   },
   "jscsConfig": {
     "preset": "google",

@@ -1,10 +1,9 @@
 'use strict';
 
-var fs = require('fs');
 var spawn = require('child_process').spawn;
 
 var flexSvg = require('../');
-var rimraf = require('rimraf');
+var readRemoveFile = require('read-remove-file');
 var test = require('tape');
 
 var pkg = require('../package.json');
@@ -38,7 +37,10 @@ test('flexSvg()', function(t) {
       result, expected,
       'should remove width and height attributes from SVG.'
     );
-    t.error(err, 'should not pass any errors when it removes attributes successfully');
+    t.strictEqual(
+      err, null,
+      'should not pass any errors when it removes attributes successfully'
+    );
   });
 
   flexSvg(fixtureNoAttr, function(err, result) {
@@ -46,7 +48,10 @@ test('flexSvg()', function(t) {
       result, expectedNoAttr,
       'should return SVG string even if the input SVG doesn\'t have any attributes'
     );
-    t.error(err, 'should not pass any errors even if the input SVG doesn\'t have any attributes');
+    t.strictEqual(
+      err, null,
+      'should not pass any errors even if the input SVG doesn\'t have any attributes'
+    );
   });
 
   flexSvg('<svg><</svg>', function(err) {
@@ -87,27 +92,19 @@ test('"flex-svg" command inside a TTY context', function(t) {
     t.equal(output, expected + '\n', 'should print SVG string.');
   });
 
-  cmd(['--input', 'test/fixture.svg', '--output', 'test/tmp_foo/svg'])
+  cmd(['--input', 'test/fixture.svg', '--output', 'tmp.svg'])
   .on('close', function() {
-    fs.readFile('test/tmp_foo/svg', function(err, buf) {
-      t.error(err, 'should output a file using --output flag.');
-      t.equal(
-        buf.toString(), expected,
-        'should use a file as a source, using --input flag.'
-      );
-      rimraf.sync('test/tmp_foo');
+    readRemoveFile('tmp.svg', 'utf8', function(err, content) {
+      t.strictEqual(err, null, 'should output a file using --output flag.');
+      t.equal(content, expected, 'should use a file as a source, using --input flag.');
     });
   });
 
-  cmd(['-i', 'test/fixture.svg', '-o', 'test/tmp_bar/svg'])
+  cmd(['-i', 'test/fixture.svg', '-o', 'tmp/tmp.svg'])
   .on('close', function() {
-    fs.readFile('test/tmp_bar/svg', function(err, buf) {
-      t.error(err, 'should use -o as an alias of --output.');
-      t.equal(
-        buf.toString(), expected,
-        'should use -i as an alias of --input.'
-      );
-      rimraf.sync('test/tmp_bar');
+    readRemoveFile('tmp/tmp.svg', 'utf8', function(err, content) {
+      t.strictEqual(err, null, 'should use -o as an alias of --output.');
+      t.equal(content, expected, 'should use -i as an alias of --input.');
     });
   });
 
