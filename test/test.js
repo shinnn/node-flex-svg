@@ -1,8 +1,9 @@
+/*eslint new-cap:0 */
 'use strict';
 
 var spawn = require('child_process').spawn;
 
-var flexSvg = require('../');
+var flexSvg = require('..');
 var readRemoveFile = require('read-remove-file');
 var test = require('tape');
 
@@ -30,48 +31,97 @@ var expectedNoAttr = [
 ].join('\n');
 
 test('flexSvg()', function(t) {
-  t.plan(7);
+  t.plan(9);
+
+  t.equal(flexSvg.name, 'flexSvg', 'should have a function name.');
 
   flexSvg(fixture, function(err, result) {
-    t.equal(
-      result, expected,
+    t.deepEqual(
+      [err, result],
+      [null, expected],
       'should remove width and height attributes from SVG.'
-    );
-    t.strictEqual(
-      err, null,
-      'should not pass any errors when it removes attributes successfully'
     );
   });
 
-  flexSvg(fixtureNoAttr, function(err, result) {
-    t.equal(
-      result, expectedNoAttr,
+  flexSvg(fixtureNoAttr, null, function(err, result) {
+    t.deepEqual(
+      [err, result],
+      [null, expectedNoAttr],
       'should return SVG string even if the input SVG doesn\'t have any attributes'
     );
-    t.strictEqual(
-      err, null,
-      'should not pass any errors even if the input SVG doesn\'t have any attributes'
+  });
+
+  flexSvg(fixture, {
+    ignoreAttrs: true,
+    xmldec: {encoding: 'base64'}
+  }, function(err, result) {
+    t.deepEqual(
+      [err, result],
+      [null, '<?xml version="1.0" encoding="base64"?>\n<svg>\n</svg>'],
+      'should support parser options and builder options.'
     );
   });
 
   flexSvg('<svg><</svg>', function(err) {
     t.equal(
-      err.message, 'Unencoded <\nLine: 0\nColumn: 7\nChar: <',
+      err.message,
+      'Unencoded <\nLine: 0\nColumn: 7\nChar: <',
       'should pass an error when input string is invalid SVG.'
     );
   });
 
   flexSvg('<p/>\n', function(err) {
     t.equal(
-      err.message, 'Input doesn\'t SVG.',
+      err.message,
+      'Input doesn\'t SVG.',
       'should pass an error when input string is not SVG.'
     );
   });
 
   flexSvg('', function(err) {
     t.equal(
-      err.message, 'Input doesn\'t SVG.',
+      err.message,
+      'Input doesn\'t SVG.',
       'should pass an error when it takes an empty string.'
+    );
+  });
+
+  t.throws(
+    flexSvg.bind(null, fixture, true),
+    /TypeError.*true is not a function.*must be a function/,
+    'should throw a type error when the last argument is not a function.'
+  );
+
+  t.throws(
+    flexSvg.bind(null, null, t.fail),
+    /TypeError.*toString/,
+    'should throw a type error when the first argument doesn\'t have .toString() method.'
+  );
+});
+
+test('flexSvg.FlexSvg()', function(t) {
+  t.plan(3);
+
+  var FlexSvg = flexSvg.FlexSvg;
+
+  t.equal(FlexSvg.name, 'FlexSvg', 'should have a function name.');
+
+  new FlexSvg({
+    ignoreAttrs: true,
+    xmldec: {encoding: 'base64'}
+  })(fixture, function(err, result) {
+    t.deepEqual(
+      [err, result],
+      [null, '<?xml version="1.0" encoding="base64"?>\n<svg>\n</svg>'],
+      'should support parser options and builder options.'
+    );
+  });
+
+  FlexSvg()(fixture, function(err, result) {
+    t.deepEqual(
+      [err, result],
+      [null, expected],
+      'should create an tnstance when it is called without `new`..'
     );
   });
 });
@@ -92,16 +142,14 @@ test('"flex-svg" command inside a TTY context', function(t) {
     t.equal(output, expected + '\n', 'should print SVG string.');
   });
 
-  cmd(['--input', 'test/fixture.svg', '--output', 'tmp.svg'])
-  .on('close', function() {
+  cmd(['--input', 'test/fixture.svg', '--output', 'tmp.svg']).on('close', function() {
     readRemoveFile('tmp.svg', 'utf8', function(err, content) {
       t.strictEqual(err, null, 'should output a file using --output flag.');
       t.equal(content, expected, 'should use a file as a source, using --input flag.');
     });
   });
 
-  cmd(['-i', 'test/fixture.svg', '-o', 'tmp/tmp.svg'])
-  .on('close', function() {
+  cmd(['-i', 'test/fixture.svg', '-o', 'tmp/tmp.svg']).on('close', function() {
     readRemoveFile('tmp/tmp.svg', 'utf8', function(err, content) {
       t.strictEqual(err, null, 'should use -o as an alias of --output.');
       t.equal(content, expected, 'should use -i as an alias of --input.');

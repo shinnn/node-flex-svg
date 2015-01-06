@@ -43,9 +43,10 @@ npm install flex-svg
 
 ## API
 
-### flexSvg(*SVGdata*, *callback*)
+### flexSvg(*SVGdata* [, *options*], *callback*)
 
 *SVGdata*: `String` of SVG or `Buffer` of SVG file  
+*options*: `Object` (directly passed to the [xml2js.Parser](https://github.com/Leonidas-from-XIV/node-xml2js#options) options and the [xml2js.Builder](https://github.com/Leonidas-from-XIV/node-xml2js#options-for-the-builder-class) options)  
 *callback*: `Function`
 
 #### callback(*error*, *result*)
@@ -65,6 +66,12 @@ fs.readFile('path/to/svg', function(readErr, data) {
   });
 });
 ```
+
+### flexSvg.FlexSvg([*options*])
+
+Return: `Function`
+
+Create a function to which options are binded. This is more efficient way in the case when the program repeatedly runs [`flexSvg`](#flexsvgsvgdata--options-callback) function with the same options.
 
 ## CLI
 
