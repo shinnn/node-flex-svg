@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/shinnn/node-flex-svg.svg?branch=master)](https://travis-ci.org/shinnn/node-flex-svg)
 [![Build status](https://ci.appveyor.com/api/projects/status/9q6scamtv2b5q9cw?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/node-flex-svg)
-[![Coverage Status](https://img.shields.io/coveralls/shinnn/node-flex-svg.svg)](https://coveralls.io/r/shinnn/node-flex-svg)
+[![Coverage Status](https://img.shields.io/coveralls/shinnn/node-flex-svg.svg?style=flat)](https://coveralls.io/r/shinnn/node-flex-svg)
 [![Dependency Status](https://david-dm.org/shinnn/node-flex-svg.svg)](https://david-dm.org/shinnn/node-flex-svg)
 [![devDependency Status](https://david-dm.org/shinnn/node-flex-svg/dev-status.svg)](https://david-dm.org/shinnn/node-flex-svg#info=devDependencies)
 
@@ -33,9 +33,9 @@ If `width` and `height` attributes of outermost svg elements are not specified, 
 
 ## Installation
 
-[![NPM version](https://badge.fury.io/js/flex-svg.svg)](https://www.npmjs.org/package/flex-svg)
+[![NPM version](https://img.shields.io/npm/v/flex-svg.svg?style=flat)](https://www.npmjs.com/package/flex-svg)
 
-[Use npm.](https://www.npmjs.org/doc/cli/npm-install.html)
+[Use npm.](https://docs.npmjs.com/cli/install)
 
 ```
 npm install flex-svg
@@ -75,7 +75,7 @@ Create a function to which options are binded. This is more efficient way in the
 
 ## CLI
 
-You can use this module as a CLI tool by installing it [globally](https://www.npmjs.org/doc/files/npm-folders.html#global-installation).
+You can use this module as a CLI tool by installing it [globally](https://docs.npmjs.com/files/folders#global-installation).
 
 ```
 npm install -g flex-svg
