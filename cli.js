@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 'use strict';
 
-var fs = require('fs');
-
 var outputFileSync = require('output-file-sync');
 var yargs = require('yargs');
 
@@ -49,7 +47,8 @@ if (process.stdin.isTTY) {
   if (argv._.length === 0 && argv.input === undefined || argv.help !== undefined) {
     yargs.showHelp(console.log);
   } else if (argv.input) {
-    run(fs.readFileSync(argv.input));
+    var fs = require('fs');
+    run(fs.readFileSync(argv.input, 'utf8').replace(/^\ufeff/g, ''));
   } else {
     run(argv._[0]);
   }
