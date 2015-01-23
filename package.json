@@ -1,12 +1,11 @@
 {
   "name": "flex-svg",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Create SVG files of flexible width and height",
   "bin": "cli.js",
   "files": [
     "cli.js",
-    "index.js",
-    "LICENSE"
+    "index.js"
   ],
   "scripts": {
     "pretest": "jscs *.js test/test.js && eslint *.js test/test.js",
