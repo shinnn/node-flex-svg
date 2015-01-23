@@ -1,10 +1,11 @@
 # flex-svg
 
+[![NPM version](https://img.shields.io/npm/v/flex-svg.svg?style=flat)](https://www.npmjs.com/package/flex-svg)
 [![Build Status](https://travis-ci.org/shinnn/node-flex-svg.svg?branch=master)](https://travis-ci.org/shinnn/node-flex-svg)
 [![Build status](https://ci.appveyor.com/api/projects/status/9q6scamtv2b5q9cw?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/node-flex-svg)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/node-flex-svg.svg?style=flat)](https://coveralls.io/r/shinnn/node-flex-svg)
-[![Dependency Status](https://david-dm.org/shinnn/node-flex-svg.svg)](https://david-dm.org/shinnn/node-flex-svg)
-[![devDependency Status](https://david-dm.org/shinnn/node-flex-svg/dev-status.svg)](https://david-dm.org/shinnn/node-flex-svg#info=devDependencies)
+[![Dependency Status](https://img.shields.io/david/shinnn/node-flex-svg.svg?style=flat&label=deps)](https://david-dm.org/shinnn/node-flex-svg)
+[![devDependency Status](https://img.shields.io/david/dev/shinnn/node-flex-svg.svg?style=flat&label=devDeps)](https://david-dm.org/shinnn/node-flex-svg#info=devDependencies)
 
 A [Node](http://nodejs.org/) module for creating SVG files of flexible width and height
 
@@ -32,8 +33,6 @@ If `width` and `height` attributes of outermost svg elements are not specified, 
 * [gulp-flex-svg](https://github.com/shinnn/gulp-flex-svg) ([gulp](http://gulpjs.com/) plugin)
 
 ## Installation
-
-[![NPM version](https://img.shields.io/npm/v/flex-svg.svg?style=flat)](https://www.npmjs.com/package/flex-svg)
 
 [Use npm.](https://docs.npmjs.com/cli/install)
 
@@ -96,6 +95,6 @@ Options:
 
 ## License
 
-Copyright (c) 2014 [Shinnosuke Watanabe](https://github.com/shinnn)
+Copyright (c) [Shinnosuke Watanabe](https://github.com/shinnn)
 
 Licensed under [the MIT License](./LICENSE)
