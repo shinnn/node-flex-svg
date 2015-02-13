@@ -7,11 +7,13 @@ version: '{build}'
 
 environment:
   matrix:
-    - nodejs_version: '0.11'
+    - nodejs_version: '1.2'
+    - nodejs_version: '0.12'
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - npm install
+  - npm install --production
+  - npm install read-remove-file tape
 
 build: off
 
