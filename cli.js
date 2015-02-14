@@ -12,7 +12,7 @@ var argv = yargs
     'Usage1: flex-svg <SVG string>',
     'Usage2: cat <SVG file> | flex-svg'
   ].join('\n'))
-  .version(pkg.version + '\n', 'version')
+  .version(pkg.version, 'version')
   .alias({
     'i': 'input',
     'o': 'output',
@@ -45,7 +45,7 @@ function run(data) {
 
 if (process.stdin.isTTY) {
   if (argv._.length === 0 && argv.input === undefined || argv.help !== undefined) {
-    yargs.showHelp(console.log);
+    yargs.showHelp('log');
   } else if (argv.input) {
     var fs = require('fs');
     run(fs.readFileSync(argv.input, 'utf8').replace(/^\ufeff/g, ''));

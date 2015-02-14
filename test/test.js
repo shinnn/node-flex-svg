@@ -178,7 +178,7 @@ test('"flex-svg" command inside a TTY context', function(t) {
     t.notEqual(code, 0, 'should fail when it cannot parse the string.');
     t.ok(
       /Unquoted attribute value/.test(parseErr),
-      'should print an  error it cannot parse the string.'
+      'should print an error message when it cannot parse the string.'
     );
   })
   .stderr.on('data', function(output) {
@@ -191,7 +191,7 @@ test('"flex-svg" command inside a TTY context', function(t) {
     t.notEqual(code, 0, 'should fail when it cannot read the file.');
     t.ok(
       /ENOENT/.test(inputErr),
-      'should print an  error it cannot read the file.'
+      'should print an error message when it cannot read the file.'
     );
   })
   .stderr.on('data', function(output) {
@@ -204,7 +204,7 @@ test('"flex-svg" command inside a TTY context', function(t) {
     t.notEqual(code, 0, 'should fail when it cannot write the file.');
     t.ok(
       /EISDIR/.test(outputErr),
-      'should print an  error it cannot write the file.'
+      'should print an error message when it cannot write the file.'
     );
   })
   .stderr.on('data', function(output) {
