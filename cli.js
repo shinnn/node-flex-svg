@@ -14,17 +14,17 @@ var argv = yargs
   ].join('\n'))
   .version(pkg.version, 'version')
   .alias({
-    'i': 'input',
-    'o': 'output',
-    'h': 'help',
-    'v': 'version'
+    i: 'input',
+    o: 'output',
+    h: 'help',
+    v: 'version'
   })
   .string(['_', 'i', 'o'])
   .describe({
-    'i': 'Input SVG file instead of SVG string.',
-    'o': 'Output file (STDOUT by default)',
-    'h': 'Display usage information',
-    'v': 'Display version number'
+    i: 'Input SVG file instead of SVG string.',
+    o: 'Output file (STDOUT by default)',
+    h: 'Display usage information',
+    v: 'Display version number'
   })
   .argv;
 
@@ -35,6 +35,7 @@ function run(data) {
     if (err) {
       throw err;
     }
+
     if (argv.output) {
       outputFileSync(argv.output, result);
     } else {
