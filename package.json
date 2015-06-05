@@ -14,10 +14,7 @@
     "coveralls": "${npm_package_scripts_coverage} && istanbul-coveralls"
   },
   "repository": "shinnn/node-flex-svg",
-  "author": {
-    "name": "Shinnosuke Watanabe",
-    "url": "https://github.com/shinnn"
-  },
+  "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
   "keywords": [
     "cli",
     "command-line",
@@ -28,25 +25,20 @@
     "width",
     "height"
   ],
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/shinnn/node-flex-svg/blob/master/LICENSE"
-    }
-  ],
+  "license": "MIT",
   "dependencies": {
     "get-stdin": "^4.0.1",
     "output-file-sync": "^1.1.0",
-    "xml2js": "^0.4.8",
-    "yargs": "^3.8.0"
+    "xml2js": "^0.4.9",
+    "yargs": "^3.10.0"
   },
   "devDependencies": {
     "@shinnn/eslintrc-node": "^1.0.2",
-    "eslint": "^0.20.0",
-    "istanbul": "^0.3.13",
-    "istanbul-coveralls": "^1.0.2",
+    "eslint": "^0.22.1",
+    "istanbul": "^0.3.14",
+    "istanbul-coveralls": "^1.0.3",
     "read-remove-file": "^2.0.0",
-    "tap-spec": "^3.0.0",
+    "tap-spec": "^4.0.0",
     "tape": "^4.0.0"
   }
 }
