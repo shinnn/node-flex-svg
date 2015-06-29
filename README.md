@@ -1,13 +1,13 @@
 # flex-svg
 
-[![NPM version](https://img.shields.io/npm/v/flex-svg.svg?style=flat)](https://www.npmjs.com/package/flex-svg)
+[![NPM version](https://img.shields.io/npm/v/flex-svg.svg)](https://www.npmjs.com/package/flex-svg)
 [![Build Status](https://travis-ci.org/shinnn/node-flex-svg.svg?branch=master)](https://travis-ci.org/shinnn/node-flex-svg)
 [![Build status](https://ci.appveyor.com/api/projects/status/9q6scamtv2b5q9cw?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/node-flex-svg)
-[![Coverage Status](https://img.shields.io/coveralls/shinnn/node-flex-svg.svg?style=flat)](https://coveralls.io/r/shinnn/node-flex-svg)
-[![Dependency Status](https://img.shields.io/david/shinnn/node-flex-svg.svg?style=flat&label=deps)](https://david-dm.org/shinnn/node-flex-svg)
-[![devDependency Status](https://img.shields.io/david/dev/shinnn/node-flex-svg.svg?style=flat&label=devDeps)](https://david-dm.org/shinnn/node-flex-svg#info=devDependencies)
+[![Coverage Status](https://img.shields.io/coveralls/shinnn/node-flex-svg.svg)](https://coveralls.io/r/shinnn/node-flex-svg)
+[![Dependency Status](https://img.shields.io/david/shinnn/node-flex-svg.svg?label=deps)](https://david-dm.org/shinnn/node-flex-svg)
+[![devDependency Status](https://img.shields.io/david/dev/shinnn/node-flex-svg.svg?label=devDeps)](https://david-dm.org/shinnn/node-flex-svg#info=devDependencies)
 
-A [Node](http://nodejs.org/) module for creating SVG files of flexible width and height
+A [Node](https://nodejs.org/) module for creating SVG files of flexible width and height
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -42,6 +42,10 @@ npm install flex-svg
 
 ## API
 
+```js
+const flexSvg = require('flex-svg');
+```
+
 ### flexSvg(*SVGdata* [, *options*], *callback*)
 
 *SVGdata*: `String` of SVG or `Buffer` of SVG file  
@@ -54,13 +58,19 @@ npm install flex-svg
 *result*: `String` of SVG without `width` and `height` attributes
 
 ```javascript
-var fs = require('fs');
-var flexSvg = require('flex-svg');
+const fs = require('fs');
+const flexSvg = require('flex-svg');
 
-fs.readFile('path/to/svg', function(readErr, data) {
-  if (readErr) throw readErr;
-  flexSvg(data, function(parseErr, result) {
-    if (parseErr) throw parseErr;
+fs.readFile('path/to/file.svg', (readErr, data) => {
+  if (readErr) {
+    throw readErr;
+  }
+
+  flexSvg(data, (parseErr, result) => {
+    if (parseErr) {
+      throw parseErr;
+    }
+
     console.log(result);
   });
 });
@@ -95,6 +105,6 @@ Options:
 
 ## License
 
-Copyright (c) [Shinnosuke Watanabe](https://github.com/shinnn)
+Copyright (c) 2014 - 2015 [Shinnosuke Watanabe](https://github.com/shinnn)
 
 Licensed under [the MIT License](./LICENSE)
