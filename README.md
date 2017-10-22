@@ -1,13 +1,11 @@
 # flex-svg
 
-[![NPM version](https://img.shields.io/npm/v/flex-svg.svg)](https://www.npmjs.com/package/flex-svg)
+[![npm version](https://img.shields.io/npm/v/flex-svg.svg)](https://www.npmjs.com/package/flex-svg)
 [![Build Status](https://travis-ci.org/shinnn/node-flex-svg.svg?branch=master)](https://travis-ci.org/shinnn/node-flex-svg)
 [![Build status](https://ci.appveyor.com/api/projects/status/9q6scamtv2b5q9cw?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/node-flex-svg)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/node-flex-svg.svg)](https://coveralls.io/r/shinnn/node-flex-svg)
-[![Dependency Status](https://img.shields.io/david/shinnn/node-flex-svg.svg?label=deps)](https://david-dm.org/shinnn/node-flex-svg)
-[![devDependency Status](https://img.shields.io/david/dev/shinnn/node-flex-svg.svg?label=devDeps)](https://david-dm.org/shinnn/node-flex-svg#info=devDependencies)
 
-A [Node](https://nodejs.org/) module for creating SVG files of flexible width and height
+A [Node.js](https://nodejs.org/) module to create SVG files of flexible width and height
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -42,13 +40,13 @@ npm install flex-svg
 
 ## API
 
-```js
+```javascript
 const flexSvg = require('flex-svg');
 ```
 
 ### flexSvg(*SVGdata* [, *options*], *callback*)
 
-*SVGdata*: `String` of SVG or `Buffer` of SVG file  
+*SVGdata*: `string` `Buffer` (SVG)  
 *options*: `Object` (directly passed to the [xml2js.Parser](https://github.com/Leonidas-from-XIV/node-xml2js#options) options and the [xml2js.Builder](https://github.com/Leonidas-from-XIV/node-xml2js#options-for-the-builder-class) options)  
 *callback*: `Function`
 
@@ -105,6 +103,6 @@ Options:
 
 ## License
 
-Copyright (c) 2014 - 2015 [Shinnosuke Watanabe](https://github.com/shinnn)
+Copyright (c) 2014 - 2017 [Shinnosuke Watanabe](https://github.com/shinnn)
 
 Licensed under [the MIT License](./LICENSE)

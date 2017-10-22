@@ -1,37 +1,34 @@
 #!/usr/bin/env node
 'use strict';
 
-var outputFileSync = require('output-file-sync');
-var yargs = require('yargs');
+const outputFileSync = require('output-file-sync');
+const yargs = require('yargs');
 
-var pkg = require('./package.json');
-var argv = yargs
-  .usage([
-    pkg.description,
-    '',
-    'Usage1: flex-svg <SVG string>',
-    'Usage2: cat <SVG file> | flex-svg'
-  ].join('\n'))
-  .version(pkg.version, 'version')
-  .alias({
-    i: 'input',
-    o: 'output',
-    h: 'help',
-    v: 'version'
-  })
-  .string(['_', 'i', 'o'])
-  .describe({
-    i: 'Input SVG file instead of SVG string.',
-    o: 'Output file (STDOUT by default)',
-    h: 'Display usage information',
-    v: 'Display version number'
-  })
-  .argv;
+const pkg = require('./package.json');
+const argv = yargs
+.usage([
+  pkg.description,
+  '',
+  'Usage1: flex-svg <SVG string>',
+  'Usage2: cat <SVG file> | flex-svg'
+].join('\n'))
+.alias({
+  i: 'input',
+  o: 'output',
+  h: 'help',
+  v: 'version'
+})
+.string(['_', 'i', 'o'])
+.describe({
+  input: 'Input SVG file instead of SVG string.',
+  output: 'Output file (STDOUT by default)'
+})
+.argv;
 
 function run(data) {
-  var flexSvg = require('./');
+  const flexSvg = require('./');
 
-  flexSvg(data, function(err, result) {
+  flexSvg(data, (err, result) => {
     if (err) {
       throw err;
     }
@@ -45,14 +42,14 @@ function run(data) {
 }
 
 if (process.stdin.isTTY) {
-  if (argv._.length === 0 && argv.input === undefined || argv.help !== undefined) {
+  if (argv._.length === 0 && argv.input === undefined || argv.help) {
     yargs.showHelp('log');
   } else if (argv.input) {
-    var fs = require('fs');
+    const fs = require('fs');
     run(fs.readFileSync(argv.input, 'utf8').replace(/^\ufeff/g, ''));
   } else {
     run(argv._[0]);
   }
 } else {
-  require('get-stdin')(run);
+  require('get-stdin')().then(run);
 }

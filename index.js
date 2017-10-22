@@ -1,30 +1,25 @@
-// flex-svg
-// Copyright (c) 2014 - 2015 Shinnosuke Watanabe
-// Licensed uder the MIT license
-
 'use strict';
 
-var xml2js = require('xml2js');
+const xml2js = require('xml2js');
 
 function FlexSvg(options) {
   if (!(this instanceof FlexSvg)) {
     return new FlexSvg(options);
   }
 
-  var parser = new xml2js.Parser(options);
-  var builder = new xml2js.Builder(options);
+  const parser = new xml2js.Parser(options);
+  const builder = new xml2js.Builder(options);
 
   this.parser = parser;
   this.builder = builder;
 
   return function flexSvg(data, cb) {
     if (typeof cb !== 'function') {
-      throw new TypeError(
-        cb +
-        ' is not a function. The last argument to flex-svg must be a function.'
-      );
+      throw new TypeError(cb +
+        ' is not a function. The last argument to flex-svg must be a function.');
     }
-    parser.parseString(data, function(err, result) {
+
+    parser.parseString(data, (err, result) => {
       if (err) {
         cb(err);
         return;
@@ -35,7 +30,7 @@ function FlexSvg(options) {
         return;
       }
 
-      var attributes = result.svg.$;
+      const attributes = result.svg.$;
       if (attributes) {
         delete attributes.width;
         delete attributes.height;

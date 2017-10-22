@@ -1,51 +1,39 @@
-/*eslint new-cap:0 */
+/* eslint new-cap:0 */
 'use strict';
 
-var spawn = require('child_process').spawn;
+const spawn = require('child_process').spawn;
 
-var flexSvg = require('..');
-var readRemoveFile = require('read-remove-file');
-var test = require('tape');
+const flexSvg = require('..');
+const readRemoveFile = require('read-remove-file');
+const test = require('tape');
 
-var pkg = require('../package.json');
+const pkg = require('../package.json');
 
-var fixture = [
-  '<?xml version="1.0" encoding="utf-8"?>',
-  '<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="1px" height="2px">',
-  '</svg>;'
-].join('\n');
+const fixture = `<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="1px" height="2px">
+</svg>`;
 
-var fixtureNoAttr = [
-  '<?xml version="1.0" encoding="utf-8"?>',
-  '<svg></svg>;'
-].join('\n');
+const fixtureNoAttr = '<?xml version="1.0" encoding="utf-8"?><svg></svg>';
 
-var expected = [
-  '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
-  '<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"/>'
-].join('\n');
+const expected = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"/>`;
 
-var expectedNoAttr = [
-  '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
-  '<svg/>'
-].join('\n');
+const expectedNoAttr = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><svg/>`;
 
-test('flexSvg()', function(t) {
-  t.plan(9);
+test('flexSvg()', t => {
+  t.plan(8);
 
-  t.equal(flexSvg.name, 'flexSvg', 'should have a function name.');
-
-  flexSvg(fixture, function(err, result) {
+  flexSvg(fixture, (...args) => {
     t.deepEqual(
-      [err, result],
+      args,
       [null, expected],
       'should remove width and height attributes from SVG.'
     );
   });
 
-  flexSvg(fixtureNoAttr, null, function(err, result) {
+  flexSvg(fixtureNoAttr, null, (...args) => {
     t.deepEqual(
-      [err, result],
+      args,
       [null, expectedNoAttr],
       'should return SVG string even if the input SVG doesn\'t have any attributes'
     );
@@ -54,15 +42,15 @@ test('flexSvg()', function(t) {
   flexSvg(fixture, {
     ignoreAttrs: true,
     xmldec: {encoding: 'base64'}
-  }, function(err, result) {
+  }, (...args) => {
     t.deepEqual(
-      [err, result],
+      args,
       [null, '<?xml version="1.0" encoding="base64"?>\n<svg>\n</svg>'],
       'should support parser options and builder options.'
     );
   });
 
-  flexSvg('<svg><</svg>', function(err) {
+  flexSvg('<svg><</svg>', err => {
     t.equal(
       err.message,
       'Unencoded <\nLine: 0\nColumn: 7\nChar: <',
@@ -70,7 +58,7 @@ test('flexSvg()', function(t) {
     );
   });
 
-  flexSvg('<p/>\n', function(err) {
+  flexSvg('<p/>\n', err => {
     t.equal(
       err.message,
       'Input doesn\'t SVG.',
@@ -78,7 +66,7 @@ test('flexSvg()', function(t) {
     );
   });
 
-  flexSvg('', function(err) {
+  flexSvg('', err => {
     t.equal(
       err.message,
       'Input doesn\'t SVG.',
@@ -86,30 +74,30 @@ test('flexSvg()', function(t) {
     );
   });
 
-  t.throws(
-    flexSvg.bind(null, fixture, true),
-    /TypeError.*true is not a function.*must be a function/,
-    'should throw a type error when the last argument is not a function.'
-  );
+  flexSvg(null, err => {
+    t.equal(
+      err.message,
+      'Cannot read property \'toString\' of null',
+      'should pass an error when the first argument doesn\'t have .toString() method.'
+    );
+  });
 
   t.throws(
-    flexSvg.bind(null, null, t.fail),
-    /TypeError.*toString/,
-    'should throw a type error when the first argument doesn\'t have .toString() method.'
+    () => flexSvg(fixture, true),
+    /TypeError.*true is not a function.*must be a function/,
+    'should throw a error when the last argument is not a function.'
   );
 });
 
-test('flexSvg.FlexSvg()', function(t) {
-  t.plan(3);
+test('flexSvg.FlexSvg()', t => {
+  t.plan(2);
 
-  var FlexSvg = flexSvg.FlexSvg;
-
-  t.equal(FlexSvg.name, 'FlexSvg', 'should have a function name.');
+  const FlexSvg = flexSvg.FlexSvg;
 
   new FlexSvg({
     ignoreAttrs: true,
     xmldec: {encoding: 'base64'}
-  })(fixture, function(err, result) {
+  })(fixture, (err, result) => {
     t.deepEqual(
       [err, result],
       [null, '<?xml version="1.0" encoding="base64"?>\n<svg>\n</svg>'],
@@ -117,7 +105,7 @@ test('flexSvg.FlexSvg()', function(t) {
     );
   });
 
-  FlexSvg()(fixture, function(err, result) {
+  FlexSvg()(fixture, (err, result) => {
     t.deepEqual(
       [err, result],
       [null, expected],
@@ -126,99 +114,97 @@ test('flexSvg.FlexSvg()', function(t) {
   });
 });
 
-test('"flex-svg" command inside a TTY context', function(t) {
-  t.plan(15);
+test('"flex-svg" command inside a TTY context', t => {
+  t.plan(13);
 
-  var cmd = function(args) {
-    var cp = spawn('node', [pkg.bin].concat(args), {
+  function cmd(args) {
+    const cp = spawn('node', [pkg.bin].concat(args), {
       stdio: [process.stdin, null, null]
     });
     cp.stdout.setEncoding('utf8');
     cp.stderr.setEncoding('utf8');
     return cp;
-  };
+  }
 
-  cmd([fixture]).stdout.on('data', function(output) {
+  cmd([fixture]).stdout.on('data', output => {
     t.equal(output, expected + '\n', 'should print SVG string.');
   });
 
-  cmd(['--input', 'test/fixture.svg', '--output', 'tmp.svg']).on('close', function() {
-    readRemoveFile('tmp.svg', 'utf8', function(err, content) {
-      t.strictEqual(err, null, 'should output a file using --output flag.');
+  cmd(['--input', 'test/fixture.svg', '--output', 'tmp.svg']).on('close', () => {
+    readRemoveFile('tmp.svg', 'utf8').then(content => {
       t.equal(content, expected, 'should use a file as a source, using --input flag.');
     });
   });
 
-  cmd(['-i', 'test/fixture.svg', '-o', 'tmp/tmp.svg']).on('close', function() {
-    readRemoveFile('tmp/tmp.svg', 'utf8', function(err, content) {
-      t.strictEqual(err, null, 'should use -o as an alias of --output.');
+  cmd(['-i', 'test/fixture.svg', '-o', 'tmp/tmp.svg']).on('close', () => {
+    readRemoveFile('tmp/tmp.svg', 'utf8').then(content => {
       t.equal(content, expected, 'should use -i as an alias of --input.');
     });
   });
 
-  cmd(['--help']).stdout.on('data', function(output) {
+  cmd(['--help']).stdout.on('data', output => {
     t.ok(/Usage/.test(output), 'should print usage information using --help flag.');
   });
 
-  cmd(['-h']).stdout.on('data', function(output) {
+  cmd(['-h']).stdout.on('data', output => {
     t.ok(/Usage/.test(output), 'should use -h as an alias of --help.');
   });
 
-  cmd(['--version']).stdout.on('data', function(output) {
+  cmd(['--version']).stdout.on('data', output => {
     t.equal(output, pkg.version + '\n', 'should print version number using --version flag.');
   });
 
-  cmd(['-v']).stdout.on('data', function(output) {
+  cmd(['-v']).stdout.on('data', output => {
     t.equal(output, pkg.version + '\n', 'should use -v as an alias of --version.');
   });
 
-  var parseErr = '';
+  let parseErr = '';
   cmd(['<svg foo=1></svg>'])
-  .on('close', function(code) {
+  .on('close', code => {
     t.notEqual(code, 0, 'should fail when it cannot parse the string.');
     t.ok(
       /Unquoted attribute value/.test(parseErr),
       'should print an error message when it cannot parse the string.'
     );
   })
-  .stderr.on('data', function(output) {
+  .stderr.on('data', output => {
     parseErr += output;
   });
 
-  var inputErr = '';
+  let inputErr = '';
   cmd(['--input', '____foo_____bar____baz____qux____'])
-  .on('close', function(code) {
+  .on('close', code => {
     t.notEqual(code, 0, 'should fail when it cannot read the file.');
     t.ok(
       /ENOENT/.test(inputErr),
       'should print an error message when it cannot read the file.'
     );
   })
-  .stderr.on('data', function(output) {
+  .stderr.on('data', output => {
     inputErr += output;
   });
 
-  var outputErr = '';
+  let outputErr = '';
   cmd([fixture, '--output', 'node_modules'])
-  .on('close', function(code) {
+  .on('close', code => {
     t.notEqual(code, 0, 'should fail when it cannot write the file.');
     t.ok(
       /EISDIR/.test(outputErr),
       'should print an error message when it cannot write the file.'
     );
   })
-  .stderr.on('data', function(output) {
+  .stderr.on('data', output => {
     outputErr += output;
   });
 });
 
-test('"flex-svg" command outside a TTY context', function(t) {
+test('"flex-svg" command outside a TTY context', t => {
   t.plan(1);
 
-  var cp = spawn('node', [pkg.bin], {
+  const cp = spawn('node', [pkg.bin], {
     stdio: ['pipe', null, null]
   });
-  cp.stdout.on('data', function(data) {
+  cp.stdout.on('data', data => {
     t.equal(data.toString(), expected + '\n', 'should print SVG string.');
   });
   cp.stdin.end(fixture);

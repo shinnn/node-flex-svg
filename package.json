@@ -8,8 +8,8 @@
     "index.js"
   ],
   "scripts": {
-    "pretest": "eslint --config node_modules/@shinnn/eslintrc-node/rc.json cli.js index.js test/test.js",
-    "test": "node test/test.js | tap-spec",
+    "pretest": "eslint --fix --format=codeframe cli.js index.js test/test.js",
+    "test": "node test/test.js",
     "coverage": "istanbul cover --no-default-excludes -x=node_modules/** test/test.js",
     "coveralls": "${npm_package_scripts_coverage} && istanbul-coveralls"
   },
@@ -27,18 +27,20 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "get-stdin": "^4.0.1",
-    "output-file-sync": "^1.1.1",
-    "xml2js": "^0.4.9",
-    "yargs": "^3.14.0"
+    "get-stdin": "^5.0.1",
+    "output-file-sync": "^2.0.0",
+    "xml2js": "^0.4.19",
+    "yargs": "^10.0.3"
   },
   "devDependencies": {
-    "@shinnn/eslintrc-node": "^1.0.2",
-    "eslint": "^0.24.0",
-    "istanbul": "^0.3.17",
+    "@shinnn/eslint-config-cli": "^3.0.0",
+    "eslint": "^4.9.0",
+    "istanbul": "^0.4.5",
     "istanbul-coveralls": "^1.0.3",
-    "read-remove-file": "^2.0.0",
-    "tap-spec": "^4.0.2",
-    "tape": "^4.0.0"
+    "read-remove-file": "^5.0.0",
+    "tape": "^4.8.0"
+  },
+  "eslintConfig": {
+    "extends": "@shinnn/cli"
   }
 }
