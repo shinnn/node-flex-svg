@@ -32,7 +32,7 @@ If `width` and `height` attributes of outermost svg elements are not specified, 
 
 ## Installation
 
-[Use npm.](https://docs.npmjs.com/cli/install)
+[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/getting-started/what-is-npm).
 
 ```
 npm install flex-svg
@@ -79,27 +79,6 @@ fs.readFile('path/to/file.svg', (readErr, data) => {
 Return: `Function`
 
 Create a function to which options are binded. This is more efficient way in the case when the program repeatedly runs [`flexSvg`](#flexsvgsvgdata--options-callback) function with the same options.
-
-## CLI
-
-You can use this module as a CLI tool by installing it [globally](https://docs.npmjs.com/files/folders#global-installation).
-
-```
-npm install -g flex-svg
-```
-
-### Usage
-
-```
-Usage1: flex-svg <SVG string>
-Usage2: cat <SVG file> | flex-svg
-
-Options:
-  -i, --input    Input SVG file instead of SVG string.
-  -o, --output   Output file (STDOUT by default)      
-  -h, --help     Display usage information            
-  -v, --version  Display version number
-```
 
 ## License
 
