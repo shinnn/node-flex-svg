@@ -2,7 +2,6 @@
 
 [![npm version](https://img.shields.io/npm/v/flex-svg.svg)](https://www.npmjs.com/package/flex-svg)
 [![Build Status](https://travis-ci.org/shinnn/node-flex-svg.svg?branch=master)](https://travis-ci.org/shinnn/node-flex-svg)
-[![Build status](https://ci.appveyor.com/api/projects/status/9q6scamtv2b5q9cw?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/node-flex-svg)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/node-flex-svg.svg)](https://coveralls.io/r/shinnn/node-flex-svg)
 
 A [Node.js](https://nodejs.org/) module to create SVG files of flexible width and height
