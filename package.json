@@ -6,10 +6,8 @@
     "index.js"
   ],
   "scripts": {
-    "pretest": "eslint --fix --format=codeframe cli.js index.js test/test.js",
-    "test": "node test/test.js",
-    "coverage": "istanbul cover --no-default-excludes -x=node_modules/** test/test.js",
-    "coveralls": "${npm_package_scripts_coverage} && istanbul-coveralls"
+    "pretest": "eslint --fix --format=codeframe index.js test.js",
+    "test": "istanbul cover --print=both test.js"
   },
   "repository": "shinnn/node-flex-svg",
   "author": "Shinnosuke Watanabe (https://github.com/shinnn)",

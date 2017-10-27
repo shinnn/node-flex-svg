@@ -1,7 +1,7 @@
 /* eslint new-cap:0 */
 'use strict';
 
-const flexSvg = require('..');
+const flexSvg = require('.');
 const test = require('tape');
 
 const fixture = `<?xml version="1.0" encoding="utf-8"?>
