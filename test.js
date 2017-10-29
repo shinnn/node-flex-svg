@@ -57,7 +57,7 @@ test('flexSvg()', t => {
   flexSvg('<p/>\n', err => {
     t.equal(
       err.message,
-      'Input doesn\'t SVG.',
+      'Input isn\'t SVG.',
       'should pass an error when input string is not SVG.'
     );
   });
@@ -65,7 +65,7 @@ test('flexSvg()', t => {
   flexSvg('', err => {
     t.equal(
       err.message,
-      'Input doesn\'t SVG.',
+      'Input isn\'t SVG.',
       'should pass an error when it takes an empty string.'
     );
   });

@@ -1,22 +1,21 @@
 'use strict';
 
-const xml2js = require('xml2js');
+const {Parser, Builder} = require('xml2js');
 
 function FlexSvg(options) {
   if (!(this instanceof FlexSvg)) {
     return new FlexSvg(options);
   }
 
-  const parser = new xml2js.Parser(options);
-  const builder = new xml2js.Builder(options);
+  const parser = new Parser(options);
+  const builder = new Builder(options);
 
   this.parser = parser;
   this.builder = builder;
 
   return function flexSvg(data, cb) {
     if (typeof cb !== 'function') {
-      throw new TypeError(cb +
-        ' is not a function. The last argument to flex-svg must be a function.');
+      throw new TypeError(`${cb} is not a function. The last argument to flex-svg must be a function.`);
     }
 
     parser.parseString(data, (err, result) => {
@@ -26,7 +25,7 @@ function FlexSvg(options) {
       }
 
       if (!result || result.svg === undefined) {
-        cb(new Error('Input doesn\'t SVG.'));
+        cb(new Error('Input isn\'t SVG.'));
         return;
       }
 
