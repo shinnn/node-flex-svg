@@ -1,6 +1,6 @@
 {
   "name": "flex-svg",
-  "version": "3.0.0-1",
+  "version": "3.0.0-2",
   "description": "Create SVG files of flexible width and height",
   "files": [
     "index.js"
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@shinnn/eslint-config-cli": "^3.0.0",
-    "eslint": "^4.9.0",
+    "eslint": "^4.10.0",
     "istanbul": "^0.4.5",
     "istanbul-coveralls": "^1.0.3",
     "tape": "^4.8.0"
