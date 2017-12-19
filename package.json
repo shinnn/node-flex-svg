@@ -1,6 +1,6 @@
 {
 	"name": "flex-svg",
-	"version": "3.0.0-3",
+	"version": "3.0.0-4",
 	"description": "Create SVG files of flexible width and height",
 	"repository": "shinnn/node-flex-svg",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
