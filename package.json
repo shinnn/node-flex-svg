@@ -1,36 +1,35 @@
 {
-  "name": "flex-svg",
-  "version": "3.0.0-2",
-  "description": "Create SVG files of flexible width and height",
-  "files": [
-    "index.js"
-  ],
-  "scripts": {
-    "pretest": "eslint --fix --format=codeframe index.js test.js",
-    "test": "istanbul cover --print=both test.js"
-  },
-  "repository": "shinnn/node-flex-svg",
-  "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
-  "keywords": [
-    "svg",
-    "xml",
-    "responsive",
-    "flexible",
-    "width",
-    "height"
-  ],
-  "license": "MIT",
-  "dependencies": {
-    "xml2js": "^0.4.19"
-  },
-  "devDependencies": {
-    "@shinnn/eslint-config-cli": "^3.0.0",
-    "eslint": "^4.10.0",
-    "istanbul": "^0.4.5",
-    "istanbul-coveralls": "^1.0.3",
-    "tape": "^4.8.0"
-  },
-  "eslintConfig": {
-    "extends": "@shinnn/cli"
-  }
+	"name": "flex-svg",
+	"version": "3.0.0-2",
+	"description": "Create SVG files of flexible width and height",
+	"repository": "shinnn/node-flex-svg",
+	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
+	"scripts": {
+		"pretest": "eslint --fix --format=codeframe index.js test.js",
+		"test": "nyc --reporter=html --reporter=text node test.js"
+	},
+	"license": "MIT",
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"svg",
+		"xml",
+		"responsive",
+		"flexible",
+		"width",
+		"height"
+	],
+	"dependencies": {
+		"xml2js": "^0.4.19"
+	},
+	"devDependencies": {
+		"@shinnn/eslint-config-node": "^5.0.0",
+		"eslint": "^4.13.1",
+		"nyc": "^11.3.0",
+		"tape": "^4.8.0"
+	},
+	"eslintConfig": {
+		"extends": "@shinnn/node"
+	}
 }

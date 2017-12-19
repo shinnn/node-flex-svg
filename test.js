@@ -17,95 +17,95 @@ const expectedNoAttr = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <svg/>`;
 
 test('flexSvg()', t => {
-  t.plan(8);
+	t.plan(8);
 
-  flexSvg(fixture, (...args) => {
-    t.deepEqual(
-      args,
-      [null, expected],
-      'should remove width and height attributes from SVG.'
-    );
-  });
+	flexSvg(fixture, (...args) => {
+		t.deepEqual(
+			args,
+			[null, expected],
+			'should remove width and height attributes from SVG.'
+		);
+	});
 
-  flexSvg(fixtureNoAttr, null, (...args) => {
-    t.deepEqual(
-      args,
-      [null, expectedNoAttr],
-      'should return SVG string even if the input SVG doesn\'t have any attributes'
-    );
-  });
+	flexSvg(fixtureNoAttr, null, (...args) => {
+		t.deepEqual(
+			args,
+			[null, expectedNoAttr],
+			'should return SVG string even if the input SVG doesn\'t have any attributes'
+		);
+	});
 
-  flexSvg(fixture, {
-    ignoreAttrs: true,
-    xmldec: {encoding: 'base64'}
-  }, (...args) => {
-    t.deepEqual(
-      args,
-      [null, '<?xml version="1.0" encoding="base64"?>\n<svg>\n</svg>'],
-      'should support parser options and builder options.'
-    );
-  });
+	flexSvg(fixture, {
+		ignoreAttrs: true,
+		xmldec: {encoding: 'base64'}
+	}, (...args) => {
+		t.deepEqual(
+			args,
+			[null, '<?xml version="1.0" encoding="base64"?>\n<svg>\n</svg>'],
+			'should support parser options and builder options.'
+		);
+	});
 
-  flexSvg('<svg><</svg>', err => {
-    t.equal(
-      err.message,
-      'Unencoded <\nLine: 0\nColumn: 7\nChar: <',
-      'should pass an error when input string is invalid SVG.'
-    );
-  });
+	flexSvg('<svg><</svg>', err => {
+		t.equal(
+			err.message,
+			'Unencoded <\nLine: 0\nColumn: 7\nChar: <',
+			'should pass an error when input string is invalid SVG.'
+		);
+	});
 
-  flexSvg('<p/>\n', err => {
-    t.equal(
-      err.message,
-      'Input isn\'t SVG.',
-      'should pass an error when input string is not SVG.'
-    );
-  });
+	flexSvg('<p/>\n', err => {
+		t.equal(
+			err.message,
+			'Input isn\'t SVG.',
+			'should pass an error when input string is not SVG.'
+		);
+	});
 
-  flexSvg('', err => {
-    t.equal(
-      err.message,
-      'Input isn\'t SVG.',
-      'should pass an error when it takes an empty string.'
-    );
-  });
+	flexSvg('', err => {
+		t.equal(
+			err.message,
+			'Input isn\'t SVG.',
+			'should pass an error when it takes an empty string.'
+		);
+	});
 
-  flexSvg(null, err => {
-    t.equal(
-      err.message,
-      'Cannot read property \'toString\' of null',
-      'should pass an error when the first argument doesn\'t have .toString() method.'
-    );
-  });
+	flexSvg(null, err => {
+		t.equal(
+			err.message,
+			'Cannot read property \'toString\' of null',
+			'should pass an error when the first argument doesn\'t have .toString() method.'
+		);
+	});
 
-  t.throws(
-    () => flexSvg(fixture, true),
-    /TypeError.*true is not a function.*must be a function/,
-    'should throw a error when the last argument is not a function.'
-  );
+	t.throws(
+		() => flexSvg(fixture, true),
+		/TypeError.*true is not a function.*must be a function/,
+		'should throw a error when the last argument is not a function.'
+	);
 });
 
 test('flexSvg.FlexSvg()', t => {
-  t.plan(2);
+	t.plan(2);
 
-  const FlexSvg = flexSvg.FlexSvg;
+	const FlexSvg = flexSvg.FlexSvg;
 
-  new FlexSvg({
-    ignoreAttrs: true,
-    xmldec: {encoding: 'base64'}
-  })(fixture, (err, result) => {
-    t.deepEqual(
-      [err, result],
-      [null, '<?xml version="1.0" encoding="base64"?>\n<svg>\n</svg>'],
-      'should support parser options and builder options.'
-    );
-  });
+	new FlexSvg({
+		ignoreAttrs: true,
+		xmldec: {encoding: 'base64'}
+	})(fixture, (err, result) => {
+		t.deepEqual(
+			[err, result],
+			[null, '<?xml version="1.0" encoding="base64"?>\n<svg>\n</svg>'],
+			'should support parser options and builder options.'
+		);
+	});
 
-  FlexSvg()(fixture, (err, result) => {
-    t.deepEqual(
-      [err, result],
-      [null, expected],
-      'should create an tnstance when it is called without `new`..'
-    );
-  });
+	FlexSvg()(fixture, (err, result) => {
+		t.deepEqual(
+			[err, result],
+			[null, expected],
+			'should create an tnstance when it is called without `new`.'
+		);
+	});
 });
