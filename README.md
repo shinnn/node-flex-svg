@@ -73,11 +73,11 @@ fs.readFile('path/to/file.svg', (readErr, data) => {
 });
 ```
 
-### flexSvg.FlexSvg([*options*])
+### class flexSvg.FlexSvg([*options*])
 
 Return: `Function`
 
-Create a function to which options are binded. This is more efficient way in the case when the program repeatedly runs [`flexSvg`](#flexsvgsvgdata--options-callback) function with the same options.
+Create a function to which options are bound. This is more efficient way in the case when the program repeatedly runs [`flexSvg`](#flexsvgsvgdata--options-callback) function with the same options.
 
 ## License
 

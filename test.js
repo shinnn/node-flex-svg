@@ -80,17 +80,15 @@ test('flexSvg()', t => {
 
 	t.throws(
 		() => flexSvg(fixture, true),
-		/TypeError.*true is not a function.*must be a function/,
+		/TypeError.*Expected the last argument to flex-svg to be a function, but got true\./,
 		'should throw a error when the last argument is not a function.'
 	);
 });
 
 test('flexSvg.FlexSvg()', t => {
-	t.plan(2);
+	t.plan(1);
 
-	const FlexSvg = flexSvg.FlexSvg;
-
-	new FlexSvg({
+	new flexSvg.FlexSvg({
 		ignoreAttrs: true,
 		xmldec: {encoding: 'base64'}
 	})(fixture, (err, result) => {
@@ -98,14 +96,6 @@ test('flexSvg.FlexSvg()', t => {
 			[err, result],
 			[null, '<?xml version="1.0" encoding="base64"?>\n<svg>\n</svg>'],
 			'should support parser options and builder options.'
-		);
-	});
-
-	FlexSvg()(fixture, (err, result) => {
-		t.deepEqual(
-			[err, result],
-			[null, expected],
-			'should create an tnstance when it is called without `new`.'
 		);
 	});
 });
