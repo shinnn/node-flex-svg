@@ -81,6 +81,4 @@ Create a function to which options are binded. This is more efficient way in the
 
 ## License
 
-Copyright (c) 2014 - 2017 [Shinnosuke Watanabe](https://github.com/shinnn)
-
-Licensed under [the MIT License](./LICENSE)
+[ISC License](./LICENSE) © 2017 Shinnosuke Watanabe
