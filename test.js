@@ -80,7 +80,7 @@ test('flexSvg()', t => {
 
 	t.throws(
 		() => flexSvg(fixture, true),
-		/TypeError.*Expected the last argument to flex-svg to be a function, but got true\./,
+		/TypeError.*Expected the last argument to flex-svg to be a function, but got true\./u,
 		'should throw a error when the last argument is not a function.'
 	);
 });
